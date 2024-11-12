@@ -33,5 +33,4 @@
 /config/master.key
 
 # Ignore the local database.yml
-/config/database.yml
 .DS_Store
