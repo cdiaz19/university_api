@@ -1,20 +1,24 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: your_username
-  password: your_password
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
   host: localhost
 
 development:
   <<: *default
-  database: university_api
+  database: university_api_development
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
 
 test:
   <<: *default
   database: university_api_test
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
 
 production:
   <<: *default
   database: university_api_production
-  username: university_api_user
-  password: <%= ENV['MY_DATABASE_PASSWORD'] %>
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
