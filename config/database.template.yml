@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: your_username
+  password: your_password
+  host: localhost
+
+development:
+  <<: *default
+  database: university_api
+
+test:
+  <<: *default
+  database: university_api_test
+
+production:
+  <<: *default
+  database: university_api_production
+  username: university_api_user
+  password: <%= ENV['MY_DATABASE_PASSWORD'] %>
