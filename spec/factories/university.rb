@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :university do
     name { Faker::University.name }
@@ -6,7 +8,7 @@ FactoryBot.define do
     website { Faker::Internet.url }
 
     trait :invalid_emails do
-      contact_emails { ["invalid_email", "example.com"] }
+      contact_emails { [ "invalid_email", "example.com" ] }
     end
   end
 end

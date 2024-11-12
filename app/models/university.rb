@@ -1,5 +1,6 @@
-class University < ApplicationRecord
+# frozen_string_literal: true
 
+class University < ApplicationRecord
   validates :name, presence: true
   validates :location, presence: true
   validates :contact_emails, presence: true

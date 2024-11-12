@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe University, type: :model do
@@ -19,7 +21,8 @@ RSpec.describe University, type: :model do
 
       it 'invalidates incorrect emails' do
         expect(university_with_invalid_emails.valid?).to be(false)
-        expect(university_with_invalid_emails.errors[:contact_emails]).to include('invalid_email, example.com are not valid email addresses')
+        expect(university_with_invalid_emails.errors[:contact_emails]).to include(
+          'invalid_email, example.com are not valid email addresses')
       end
     end
   end

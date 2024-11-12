@@ -18,7 +18,7 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 group :test do
-  gem 'shoulda-matchers', '~> 4.0'
+  gem "shoulda-matchers", "~> 4.0"
 end
 
 group :development, :test do
@@ -28,9 +28,9 @@ group :development, :test do
   gem "dotenv-rails"
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
-  gem 'rspec-rails', '~> 7.0.0'
-  gem 'factory_bot_rails'
-  gem 'faker'
+  gem "rspec-rails", "~> 7.0.0"
+  gem "factory_bot_rails"
+  gem "faker"
 end
 
 gem "tzinfo-data", platforms: %i[ windows jruby ]
