@@ -18,7 +18,7 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 group :test do
-  gem "shoulda-matchers", "~> 4.0"
+  gem "shoulda-matchers", "~> 6.4"
 end
 
 group :development, :test do
