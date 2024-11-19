@@ -20,7 +20,7 @@ gem "rack-cors"
 gem "will_paginate", "~> 3.3"
 
 group :test do
-  gem "shoulda-matchers", "~> 4.0"
+  gem "shoulda-matchers", "~> 6.4"
 end
 
 group :development, :test do
