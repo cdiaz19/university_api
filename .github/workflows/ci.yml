@@ -79,4 +79,4 @@ jobs:
           RAILS_ENV=test bundle exec rails db:create db:migrate db:seed
 
       - name: Run tests with RSpec
-        run: bundle exec rspec spec --format documentation
+        run: RAILS_ENV=test bundle exec rspec spec --format documentation
