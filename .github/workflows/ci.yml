@@ -76,7 +76,7 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         run: |
-          RAILS_ENV=test bundle exec rails db:create db:seed
+          RAILS_ENV=test bundle exec rails db:create db:migrate db:seed
 
       - name: Run tests with RSpec
         run: bundle exec rspec spec --format documentation
