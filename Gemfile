@@ -18,6 +18,7 @@ gem "kamal", require: false
 gem "thruster", require: false
 gem "rack-cors"
 gem "will_paginate", "~> 3.3"
+gem "faker"
 
 group :test do
   gem "shoulda-matchers", "~> 4.0"
@@ -32,7 +33,6 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
   gem "rspec-rails", "~> 7.0.0"
   gem "factory_bot_rails"
-  gem "faker"
 end
 
 gem "tzinfo-data", platforms: %i[ windows jruby ]
