@@ -16,8 +16,8 @@ gem "solid_cable"
 gem "bootsnap", require: false
 gem "kamal", require: false
 gem "thruster", require: false
-gem 'rack-cors'
-gem 'will_paginate', '~> 3.3'
+gem "rack-cors"
+gem "will_paginate", "~> 3.3"
 
 group :test do
   gem "shoulda-matchers", "~> 4.0"
