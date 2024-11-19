@@ -8,6 +8,10 @@ class University < ApplicationRecord
 
   validate :validate_emails
 
+  scope :search_by_name, ->(query) {
+    where("name ILIKE ?", "%#{query}%") if query.present?
+  }
+
   def validate_emails
     return if self.contact_emails.blank?
     invalid_emails = contact_emails.reject { |email| email.match?(URI::MailTo::EMAIL_REGEXP) }

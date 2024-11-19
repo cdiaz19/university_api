@@ -4,9 +4,19 @@ class Api::V1::UniversitiesController < ApplicationController
   before_action :find_university, only: [ :show, :update, :destroy ]
 
   def index
-    universities = University.all
+    universities = University
+                   .search_by_name(params[:search])
+                   .order(:id)
+                   .paginate(page: params[:page], per_page: 10)
 
-    render json: universities, status: :ok
+    render json: {
+      universities: universities,
+      page_info: {
+        current_page: universities.current_page,
+        total_pages: universities.total_pages,
+        total_entries: universities.total_entries
+      }
+    }, status: :ok
   end
 
   def show

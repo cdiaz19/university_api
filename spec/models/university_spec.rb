@@ -10,6 +10,36 @@ RSpec.describe University, type: :model do
     it { is_expected.to validate_presence_of(:website) }
   end
 
+  describe 'scopes' do
+    describe '.search_by_name' do
+      let!(:university1) { create(:university, name: 'Harvard University') }
+      let!(:university2) { create(:university, name: 'Stanford University') }
+      let!(:university3) { create(:university, name: 'Massachusetts Institute of Technology') }
+
+      context 'when a query is provided' do
+        it 'returns universities matching the query (case insensitive)' do
+          expect(University.search_by_name('harvard')).to contain_exactly(university1)
+          expect(University.search_by_name('STANFORD')).to contain_exactly(university2)
+          expect(University.search_by_name('university')).to contain_exactly(university1, university2)
+        end
+
+        it 'returns an empty result if no matches are found' do
+          expect(University.search_by_name('Nonexistent University')).to be_empty
+        end
+      end
+
+      context 'when the query is empty or nil' do
+        it 'returns all universities if query is nil' do
+          expect(University.search_by_name(nil)).to contain_exactly(university1, university2, university3)
+        end
+
+        it 'returns all universities if query is an empty string' do
+          expect(University.search_by_name('')).to contain_exactly(university1, university2, university3)
+        end
+      end
+    end
+  end
+
   describe 'methods' do
     describe '#contact_emails' do
       let(:university) { build(:university) }

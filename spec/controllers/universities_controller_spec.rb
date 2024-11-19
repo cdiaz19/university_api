@@ -4,21 +4,44 @@ require "rails_helper"
 
 RSpec.describe Api::V1::UniversitiesController, type: :controller do
   describe "GET #index" do
-    let!(:university) { create_list(:university, 2) }
-    context "when universities exist" do
-      it "returns a list of universities" do
-        get :index
-        expect(response).to have_http_status(:success)
-        expect(response.body).to eq(university.to_json)
-        expect(response.parsed_body.count).to eq(2)
+    let!(:university) { create_list(:university, 15) }
+
+    context 'without search query' do
+      it 'returns the first 10 universities with pagination info' do
+        get :index, params: { page: 1 }
+
+        expect(response).to have_http_status(:ok)
+        expect(response.parsed_body[:universities].size).to eq(10)
+        expect(response.parsed_body[:page_info][:current_page]).to eq(1)
+        expect(response.parsed_body[:page_info][:total_pages]).to eq(2)
+        expect(response.parsed_body[:page_info][:total_entries]).to eq(15)
       end
     end
+
+    context 'with a search query' do
+      let!(:matching_university) { create(:university, name: 'Test University') }
+
+      it 'returns filtered universities based on the search query' do
+        get :index, params: { search: 'Test', page: 1 }
+
+        expect(response).to have_http_status(:ok)
+        expect(response.parsed_body[:universities].size).to eq(1)
+        expect(response.parsed_body[:universities].first[:name]).to eq('Test University')
+        expect(response.parsed_body[:page_info][:total_entries]).to eq(1)
+      end
+    end
+
     context "when no universities exist" do
       before { University.destroy_all }
+
       it "returns an empty array" do
         get :index
+
         expect(response).to have_http_status(:success)
-        expect(response.parsed_body).to eq([])
+        expect(response.parsed_body[:universities]).to eq([])
+        expect(response.parsed_body[:page_info][:current_page]).to eq(1)
+        expect(response.parsed_body[:page_info][:total_pages]).to eq(1)
+        expect(response.parsed_body[:page_info][:total_entries]).to eq(0)
       end
     end
   end
