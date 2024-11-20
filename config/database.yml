@@ -10,12 +10,17 @@ default: &default
 development:
   <<: *default
   database: university_api_development
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
 
 test:
   <<: *default
   database: university_api_test
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
 
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
   database: university_api_production
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
